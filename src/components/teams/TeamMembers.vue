@@ -33,6 +33,8 @@ export default {
   },
   created() {
     this.loadTheTeam(this.teamId);
+    // logging query params
+    console.log(this.$route.query);
   },
   methods: {
     loadTheTeam(teamId) {
@@ -51,7 +53,7 @@ export default {
     teamId(newValue) {
       this.loadTheTeam(newValue);
     }
-  }
+  },
 };
 </script>
 
