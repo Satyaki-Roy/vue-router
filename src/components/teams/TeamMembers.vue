@@ -9,6 +9,7 @@
         :role="member.role"
       ></user-item>
     </ul>
+    <router-link to="/teams/t2">Team T2</router-link>
   </section>
 </template>
 
@@ -19,15 +20,38 @@ export default {
   components: {
     UserItem
   },
+  props: ['teamId'],
+  inject: [
+    'users',
+    'teams'
+  ],
   data() {
     return {
-      teamName: 'Test',
-      members: [
-        { id: 'u1', fullName: 'Max Schwarz', role: 'Engineer' },
-        { id: 'u2', fullName: 'Max Schwarz', role: 'Engineer' },
-      ],
+      teamName: '',
+      members: [],
     };
   },
+  created() {
+    this.loadTheTeam(this.teamId);
+  },
+  methods: {
+    loadTheTeam(teamId) {
+      const selectedTeam = this.teams.find(team => team.id === teamId);
+      const members = selectedTeam.members;
+      const selectedMembers = [];
+      for (const member of members) {
+        const selectedMember = this.users.find(user => user.id === member);
+        selectedMembers.push(selectedMember);
+      }
+      this.teamName = selectedTeam.name;
+      this.members = selectedMembers;
+    }
+  },
+  watch: {
+    teamId(newValue) {
+      this.loadTheTeam(newValue);
+    }
+  }
 };
 </script>
 

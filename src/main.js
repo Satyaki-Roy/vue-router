@@ -3,12 +3,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import App from './App.vue';
 import TeamsList from '@/components/teams/TeamsList';
+import TeamMembers from '@/components/teams/TeamMembers';
 import UsersList from '@/components/users/UsersList';
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/teams', component: TeamsList },
+    { path: '/teams/:teamId', component: TeamMembers, props: true },
     { path: '/users', component: UsersList },
   ],
 });
