@@ -17,6 +17,10 @@ export default {
     redirectToTeams () {
       this.$router.push('/teams');
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log('component level beforeRouteEnter');
+    next();
   }
 };
 </script>

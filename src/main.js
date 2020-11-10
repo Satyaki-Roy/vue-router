@@ -29,6 +29,10 @@ const router = createRouter({
       components: {
         default: UsersList,
         footer: UserFooter
+      },
+      beforeEnter(to, from, next) {
+        console.log('route level beforeEnter');
+        next();
       }
     },
     { path: '/:notFound(.*)', component: RouteNotFound },
@@ -36,11 +40,16 @@ const router = createRouter({
   linkActiveClass: 'active',
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
-      return savedPosition
+      return savedPosition;
     }
     return { left: 0, top: 0 }
   }
 });
+
+router.beforeEach((to, from, next) => {
+  console.log("Global beforeEach");
+  next();
+})
 
 const app = createApp(App);
 

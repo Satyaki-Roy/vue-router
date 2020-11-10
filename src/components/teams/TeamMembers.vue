@@ -54,6 +54,10 @@ export default {
       this.loadTheTeam(newValue);
     }
   },
+  beforeRouteUpdate(to, from, next) {
+    console.log('component level beforeRouteUpdate');
+    next();
+  }
 };
 </script>
 
